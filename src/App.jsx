@@ -1,36 +1,60 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { Header, Footer } from './components/index';
+import { Header, Footer, CodeArea } from './components/index';
 import { Minus, Copy, X } from '@phosphor-icons/react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 function App() {
   const [userInput, setUserInput] = useState('');
-  const placeholderCode = `function hiAnon() {
-    return "Ssup Anon";
+  const placeholderCode = `import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
 }`;
 
-  // console.log(userInput);
+  const text = `function App() {
+  const [userInput, setUserInput] = useState('');
+  const placeholderCode = import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+};`
+
+
+  useEffect(() => {
+
+    const wordBreak = (userInput) => {
+      const words = userInput.split(' ')
+      words.slice(0, 25).join(' ')
+      const rest = words.slice(25).join(' ')
+      console.log(words);
+      console.log(rest);
+      return (
+        <>
+          <p>
+            {words}
+            {rest && <br />}
+            {rest}
+          </p>
+        </>
+      )
+    }
+
+    wordBreak(userInput)
+  }, [userInput])
 
 
   return (
     <>
       {/* <Header /> */}
-      <main className="w-full min-h-[92.5vh]">
-        <div className="flex flex-col gap-10 justify-start items-center min-w-[40%] p-10 border-r border-black transition focus:outline-none focus:shadow-xs">
-          <textarea
-            value={userInput}
-            className="px-4 py-2 w-[40%] min-h-[60px] border border-black hover:shadow-none shadow-[4px_4px_0px_0px_black] transition focus:outline-none focus:shadow-xs"
-            placeholder="Clip your code..."
-            aria-label="Code input area"
-            onChange={(e) => setUserInput(e.target.value)}
-          />
-          {/* <div className="px-4 py-2 h-[40%] w-[80%] border border-black shadow-md transition focus:outline-none focus:shadow-xs"></div> */}
-        </div>
-        <div className="p-10 w-full flex justify-center items-start transition focus:outline-none focus:shadow-xs">
-          <div className="overflow-hidden min-h-[120px] border border-black hover:shadow-none shadow-[4px_4px_0px_0px_black] transition focus:outline-none focus:shadow-xs">
-            <div className="flex justify-end border-b border-black h-10">
+      <main className="w-full min-h-[100vh]">
+        <CodeArea userInput={userInput} setUserInput={setUserInput} />
+        <div className="p-6 w-full flex  justify-center items-start transition focus:outline-none focus:shadow-xs">
+          <div className="overflow-hidden border border-black hover:shadow-none shadow-[4px_4px_0px_0px_black] transition focus:outline-none focus:shadow-xs">
+            <div className="flex justify-end border-b bg-[#7EE0B8] border-black h-10">
               <button
                 className="w-10 border-l flex justify-center items-center border-black"
                 aria-label="Minimize"
@@ -53,16 +77,25 @@ function App() {
               </button>
             </div>
             <div className="flex items-center justify-center p-8 max-w-full whitespace-pre-wrap overflow-auto min-h-[80px]">
-              <pre>
-                <SyntaxHighlighter className='rounded-lg'  customStyle={{
-                  display: 'inline-block',
-                  whiteSpace: 'pre',
-                  wordBreak: 'normal',
-                  overflow: 'visible',
-                }} language="javascript" style={tomorrow} showLineNumbers>
-                  {userInput || placeholderCode}
-                </SyntaxHighlighter>
-              </pre>
+              <SyntaxHighlighter
+                className="rounded-lg highlighter"
+                customStyle={{
+                  display: 'block',
+                  padding: '3rem 2rem',
+                  whiteSpace: 'pre-wrap',
+                  wordBreak: 'break-word',
+                  overflowX: 'auto',
+                  width: '100%',
+                  maxWidth: '100%',
+                }}
+                language="javascript"
+                style={tomorrow}
+                showLineNumbers
+                wrapLongLines={true}
+                wrapLines={true}
+              >
+                {userInput || placeholderCode}
+              </SyntaxHighlighter>
             </div>
           </div>
         </div>

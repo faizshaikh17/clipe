@@ -2,7 +2,7 @@
 
 
 #root {
-    /* color: #121212; */
+    /* color: #; */
     margin: 0 auto;
     padding: 0 auto;
     background-color: #FFFFFF;
@@ -45,4 +45,8 @@ html::-webkit-scrollbar,
 body::-webkit-scrollbar {
     display: none;
     /* Chrome, Safari, Edge */
+}
+
+.highlighter {
+    
 }
