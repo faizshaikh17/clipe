@@ -10,9 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.1.7",
     "@tailwindcss/vite": "^4.1.4",
+    "lucide-react": "^0.501.0",
     "react": "^19.0.0",
+    "react-basicons": "^0.3.4",
     "react-dom": "^19.0.0",
+    "react-syntax-highlighter": "^15.6.1",
+    "shiki": "^3.2.2",
     "tailwindcss": "^4.1.4"
   },
   "devDependencies": {
