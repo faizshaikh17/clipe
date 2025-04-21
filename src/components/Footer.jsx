@@ -1,7 +1,9 @@
 import React from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import html2canvas from 'html2canvas-pro';
+import { toPng } from "html-to-image";
 
-export default function Footer({ gradients, setGradientBg, uiThemes, setUiTheme, codeThemes, setCodeTheme, fontSize, setFontSize, languages, setLanguage, setBgToggle, setGradientToggle }) {
+export default function Footer({ gradients, setGradientBg, uiThemes, setUiTheme, codeThemes, setCodeTheme, fontSize, setFontSize, languages, setLanguage, setBgToggle, setGradientToggle, exportRef }) {
   const setGradientValue = (option) => {
     return setGradientBg(option.value);
   };
@@ -32,8 +34,41 @@ export default function Footer({ gradients, setGradientBg, uiThemes, setUiTheme,
     setGradientToggle(prev => !prev);
   }
 
+  const exportImage = () => {
+    console.log('Starting export');
+    html2canvas(document.querySelector('#hero')).then(canvas => {
+      console.log('Canvas generated');
+      const link = document.createElement('a');
+      link.download = "code-image.png";
+      link.href = canvas.toDataURL();
+      link.click();
+    }).catch(err => {
+      console.error('html2canvas error:', err);
+    });
+  };
+
+
+  // const handleExport = async (exportRef) => {
+
+  //   const node = exportRef.current;
+  //   if (!node) return;
+
+  //   try {
+  //     console.log("faiz");
+  //     const dataUrl = await toPng(node, { quality: 0.89 });
+  //     const link = document.createElement("a");
+  //     link.download = "code.png";
+  //     link.href = dataUrl;
+
+  //     link.click();
+  //   } catch (err) {
+  //     console.error("Could not export as image", err);
+  //   }
+  // };
+
+
   return (
-    <div className="fixed  bottom-2 h-25 w-[55%] m-1 border overflow-hidden border-gray-400 shadow-[4px_4px_0px_0px_black] transition focus:shadow-xs focus:outline-none hover:shadow-none">
+    <div className="fixed  bottom-5  h-28 w-[60%] m-1 border overflow-hidden border-gray-400 shadow-[4px_4px_0px_0px_black] transition focus:shadow-xs focus:outline-none hover:shadow-none">
       <div className="flex inset-0 backdrop-blur-lg items-center justify-between px-5 py-5">
         <div className="flex flex-col items-start space-y-2">
           <label className="px-1 text-xs font-semibold text-black" htmlFor="Gradients">Gradient</label>
@@ -76,6 +111,10 @@ export default function Footer({ gradients, setGradientBg, uiThemes, setUiTheme,
               <button className='bg-gray-200 w-5 h-2 flex justify-center items-center' onClick={decFontSize}><ChevronDown size={14} /></button>
             </div>
           </span>
+        </div>
+        <div className="flex flex-col items-start space-y-2">
+          <label className="px-1 text-xs font-semibold text-black" htmlFor="fontSize">Download</label>
+          <button onClick={exportImage} className="h-9 w-18 rounded-md border text-white bg-black px-2 py-2 text-sm font-semibold text-[0.8rem] focus:border-black focus:outline-none">export</button>
         </div>
         <div className="flex flex-col items-start space-y-2">
           <label className="px-1 text-xs font-semibold text-black" htmlFor="fontSize">Window</label>

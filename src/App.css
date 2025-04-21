@@ -95,3 +95,9 @@ input:checked + .slider:before {
 .toggle:has(input:checked) {
     background-color: gainsboro;
 }
+
+
+
+
+
+

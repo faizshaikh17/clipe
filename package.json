@@ -7,17 +7,20 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "tailwind-init": "tailwindcss init --full"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.7",
     "@tailwindcss/vite": "^4.1.4",
+    "dom-to-image": "^2.6.0",
+    "html-to-image": "^1.11.13",
+    "html2canvas": "^1.4.1",
+    "html2canvas-pro": "^1.5.8",
     "lucide-react": "^0.501.0",
     "react": "^19.0.0",
-    "react-basicons": "^0.3.4",
     "react-dom": "^19.0.0",
-    "react-syntax-highlighter": "^15.6.1",
-    "tailwindcss": "^4.1.4"
+    "react-syntax-highlighter": "^15.6.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
@@ -28,6 +31,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
+    "tailwindcss": "^4.1.4",
     "vite": "^6.3.1"
   }
 }
