@@ -150,6 +150,8 @@ export default function App() {
   const [uiTheme, setUiTheme] = useState("sketchy");
   const [fontSize, setFontSize] = useState(14);
   const [language, setLanguage] = useState('javascript');
+  const [bgToggle, setBgToggle] = useState(true);
+  const [gradientToggle, setGradientToggle] = useState(true);
 
   const uiColor = () => {
     const uiColorsKeys = Object.keys(uiThemes).map(item => (item));
@@ -187,23 +189,25 @@ createRoot(document.getElementById('root')).render(<App />)
     fontSize: fontSize,
     setFontSize: setFontSize,
     languages: languages,
-    setLanguage: setLanguage
+    setLanguage: setLanguage,
+    setBgToggle: setBgToggle,
+    setGradientToggle: setGradientToggle
   };
 
-  console.log(language);
+  console.log(gradientToggle);
 
   return (
     <>
       <Header />
       <main
-        className="flex w-full flex-col items-center justify-start space-y-10"
+        className="flex w-full min-h-screen flex-col items-center justify-start space-y-9"
         style={{ backgroundColor: uiColors[uiTheme].codeBg, color: uiColors[uiTheme].textColor }}
       >
-        <div className="mt-10 flex w-[30%] flex-col items-center justify-center space-y-8">
+        <div className="mt-10 flex w-[39%] flex-col items-center justify-center space-y-8">
           <CodeArea userInput={userInput} setUserInput={setUserInput} />
         </div>
-        <div className="flex w-full justify-center">
-          <div className="mx-6 max-w-full overflow-hidden rounded-xl border border-black shadow-lg transition hover:shadow-md">
+        <div className="flex justify-center">
+          {bgToggle && gradientToggle ? <div className="mx-6 max-w-full overflow-hidden rounded-xl border border-black shadow-lg transition hover:shadow-md">
             {/* Toolbar */}
             <div
               className="flex h-10 justify-end border-b border-black"
@@ -250,9 +254,95 @@ createRoot(document.getElementById('root')).render(<App />)
               </div>
             </div>
           </div>
+            :
+            !bgToggle && gradientToggle ? <div className='mt-10' style={{ background: `${gradientBg}` }}>
+              <div className="overflow-auto p-10">
+                <SyntaxHighlighter
+                  className="rounded-lg"
+                  language={language}
+                  style={codeThemes[codeTheme]}
+                  showLineNumbers
+                  wrapLongLines
+                  customStyle={{
+                    opacity: '70%',
+                    fontSize: `${fontSize}px`,
+                    padding: '2.5rem 0.5rem',
+                  }}
+                >
+                  {userInput || placeholderCode}
+                </SyntaxHighlighter>
+              </div>
+            </div>
+              :
+
+              bgToggle && !gradientToggle ?
+                <div className="mx-6 max-w-full overflow-hidden rounded-xl border border-black shadow-lg transition hover:shadow-md">
+                  {/* Toolbar */}
+                  <div
+                    className="flex h-10 justify-end border-b border-black"
+                    style={{ backgroundColor: uiColors[uiTheme].toolbarBg }}
+                  >
+                    {[
+                      { Icon: Minus, label: 'Minimize', onClick: () => { } },
+                      { Icon: Copy, label: 'Copy', onClick: handleCopy },
+                      { Icon: X, label: 'Clear', onClick: handleClear },
+                    ].map(({ Icon, label, onClick }, index) => (
+                      <button
+                        key={index}
+                        aria-label={label}
+                        onClick={onClick}
+                        className="flex w-10 items-center justify-center border-l border-black transition"
+                        style={{ backgroundColor: 'transparent' }}
+                        onMouseOver={(e) =>
+                          (e.currentTarget.style.backgroundColor = uiColors[uiTheme].buttonHover)
+                        }
+                        onMouseOut={(e) =>
+                          (e.currentTarget.style.backgroundColor = 'transparent')
+                        }
+                      >
+                        <Icon />
+                      </button>
+                    ))}
+                  </div>
+                  <div className="overflow-auto p-10">
+                    <SyntaxHighlighter
+                      className="rounded-lg"
+                      language={language}
+                      style={codeThemes[codeTheme]}
+                      showLineNumbers
+                      wrapLongLines
+                      customStyle={{
+                        opacity: '70%',
+                        fontSize: `${fontSize}px`,
+                        padding: '2.5rem 0.5rem',
+                      }}
+                    >
+                      {userInput || placeholderCode}
+                    </SyntaxHighlighter>
+                  </div>
+                </div>
+                :
+                <div className="overflow-auto p-10">
+                  <SyntaxHighlighter
+                    className="rounded-lg"
+                    language={language}
+                    style={codeThemes[codeTheme]}
+                    showLineNumbers
+                    wrapLongLines
+                    customStyle={{
+                      opacity: '70%',
+                      fontSize: `${fontSize}px`,
+                      padding: '2.5rem 0.5rem',
+                    }}
+                  >
+                    {userInput || placeholderCode}
+                  </SyntaxHighlighter>
+                </div>
+          }
         </div>
         <Footer {...gradientProps} />
-      </main>
+
+      </main >
     </>
   );
 }

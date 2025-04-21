@@ -1,7 +1,7 @@
 import React from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
-export default function Footer({ gradients, setGradientBg, uiThemes, setUiTheme, codeThemes, setCodeTheme, fontSize, setFontSize, languages, setLanguage }) {
+export default function Footer({ gradients, setGradientBg, uiThemes, setUiTheme, codeThemes, setCodeTheme, fontSize, setFontSize, languages, setLanguage, setBgToggle, setGradientToggle }) {
   const setGradientValue = (option) => {
     return setGradientBg(option.value);
   };
@@ -24,13 +24,19 @@ export default function Footer({ gradients, setGradientBg, uiThemes, setUiTheme,
     }
   };
 
-  console.log(Object.entries(languages).map(([key, value]) => ({ id: key, value: value })));
+  const setToggleValue = () => {
+    setBgToggle(prev => !prev);
+  }
+
+  const setGradientToggleValue = () => {
+    setGradientToggle(prev => !prev);
+  }
 
   return (
-    <div className="fixed bottom-2 h-25 w-[55%] border border-gray-400 shadow-[4px_4px_0px_0px_black] transition focus:shadow-xs focus:outline-none hover:shadow-none">
-      <div className="flex items-center justify-between gap-3 px-5 py-5">
+    <div className="fixed bottom-2 h-25 w-[55%] m-1 border overflow-hidden border-gray-400 shadow-[4px_4px_0px_0px_black] transition focus:shadow-xs focus:outline-none hover:shadow-none">
+      <div className="flex inset-0 backdrop-blur-lg items-center justify-between px-5 py-5">
         <div className="flex flex-col items-start space-y-2">
-          <label className="px-1 text-xs font-semibold text-black" htmlFor="Gradients">Background</label>
+          <label className="px-1 text-xs font-semibold text-black" htmlFor="Gradients">Gradient</label>
           <select className="h-9 w-35 rounded-md border bg-gray-100 px-2 py-2 text-sm font-semibold text-black text-[0.8rem] focus:border-black focus:outline-none" name="Gradients">
             {Object.entries(gradients).map(([Key, value]) => ({ id: Key, value: value })).map((item) => (
               <option onClick={() => setGradientValue(item)} key={item.id} id={item.id} value={item.value}>{item.id}</option>
@@ -63,13 +69,27 @@ export default function Footer({ gradients, setGradientBg, uiThemes, setUiTheme,
         </div>
         <div className="flex flex-col items-start space-y-2">
           <label className="px-1 text-xs font-semibold text-black" htmlFor="fontSize">Font size</label>
-          <span className="flex h-9 w-12 items-center justify-between rounded-md border bg-gray-100 px-2 py-2 text-sm font-semibold text-black text-[0.8rem] focus:border-black focus:outline-none">
+          <span className="flex h-9 w-15 items-center justify-between gap-1 rounded-md border bg-gray-100 px-2 py-2 text-sm font-semibold text-black text-[0.8rem] focus:border-black focus:outline-none">
             <span>{fontSize}</span>
-            <div className="flex flex-col">
-              <button onClick={incFontSize}><ChevronUp size={14} /></button>
-              <button onClick={decFontSize}><ChevronDown size={14} /></button>
+            <div className="flex flex-col space-y-0.5">
+              <button className='bg-gray-200 w-5 h-2 flex justify-center items-center' onClick={incFontSize}><ChevronUp size={14} /></button>
+              <button className='bg-gray-200 w-5 h-2 flex justify-center items-center' onClick={decFontSize}><ChevronDown size={14} /></button>
             </div>
           </span>
+        </div>
+        <div className="flex flex-col items-start space-y-2">
+          <label className="px-1 text-xs font-semibold text-black" htmlFor="fontSize">Window</label>
+          <label className='toggle'>
+            <input type="checkbox" onChange={setToggleValue} id="toggleButton" />
+            <span className='slider'></span>
+          </label>
+        </div>
+        <div className="flex flex-col items-start space-y-2">
+          <label className="px-1 text-xs font-semibold text-black" htmlFor="fontSize">Background</label>
+          <label className='toggle'>
+            <input type="checkbox" onChange={setGradientToggleValue} id="toggleButton" />
+            <span className='slider'></span>
+          </label>
         </div>
       </div>
     </div>
