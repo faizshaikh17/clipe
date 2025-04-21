@@ -102,7 +102,8 @@ export default function App() {
     lavaMango: 'linear-gradient(to top left, #fc4a1a, #f7b733)',
     candyCloud: 'linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)',
     mysticMint: 'linear-gradient(to top, #2E8B57, #CFFFE5)',
-    sugarPlum: 'linear-gradient(to top right, #4A148C, #CE93D8)'
+    sugarPlum: 'linear-gradient(to top right, #4A148C, #CE93D8)',
+    farAway: 'linear-gradient(to bottom, #000000, #434343)'
   };
 
   const codeThemes = {
@@ -145,9 +146,9 @@ export default function App() {
   };
 
   const [userInput, setUserInput] = useState('');
-  const [codeTheme, setCodeTheme] = useState(cb);
-  const [gradientBg, setGradientBg] = useState(gradients.jungleTwist);
-  const [uiTheme, setUiTheme] = useState("sketchy");
+  const [codeTheme, setCodeTheme] = useState("a11yDark");
+  const [gradientBg, setGradientBg] = useState(gradients.farAway);
+  const [uiTheme, setUiTheme] = useState("miamiSunset");
   const [fontSize, setFontSize] = useState(14);
   const [language, setLanguage] = useState('javascript');
   const [bgToggle, setBgToggle] = useState(true);
@@ -200,129 +201,50 @@ createRoot(document.getElementById('root')).render(<App />)
     <>
       <Header />
       <main
-        className="flex w-full min-h-screen flex-col items-center justify-start space-y-9"
+        className="flex w-full min-h-screen flex-col items-center justify-start space-y-8"
         style={{ backgroundColor: uiColors[uiTheme].codeBg, color: uiColors[uiTheme].textColor }}
       >
-        <div className="mt-10 flex w-[39%] flex-col items-center justify-center space-y-8">
+        <div className="mt-10 flex w-[40%] flex-col items-center justify-center space-y-6">
           <CodeArea userInput={userInput} setUserInput={setUserInput} />
         </div>
         <div className="flex justify-center">
-          {bgToggle && gradientToggle ? <div className="mx-6 max-w-full overflow-hidden rounded-xl border border-black shadow-lg transition hover:shadow-md">
-            {/* Toolbar */}
-            <div
-              className="flex h-10 justify-end border-b border-black"
-              style={{ backgroundColor: uiColors[uiTheme].toolbarBg }}
-            >
-              {[
-                { Icon: Minus, label: 'Minimize', onClick: () => { } },
-                { Icon: Copy, label: 'Copy', onClick: handleCopy },
-                { Icon: X, label: 'Clear', onClick: handleClear },
-              ].map(({ Icon, label, onClick }, index) => (
-                <button
-                  key={index}
-                  aria-label={label}
-                  onClick={onClick}
-                  className="flex w-10 items-center justify-center border-l border-black transition"
-                  style={{ backgroundColor: 'transparent' }}
-                  onMouseOver={(e) =>
-                    (e.currentTarget.style.backgroundColor = uiColors[uiTheme].buttonHover)
-                  }
-                  onMouseOut={(e) =>
-                    (e.currentTarget.style.backgroundColor = 'transparent')
-                  }
-                >
-                  <Icon />
-                </button>
-              ))}
-            </div>
-            <div style={{ background: `${gradientBg}` }}>
-              <div className="overflow-auto p-10">
-                <SyntaxHighlighter
-                  className="rounded-lg"
-                  language={language}
-                  style={codeThemes[codeTheme]}
-                  showLineNumbers
-                  wrapLongLines
-                  customStyle={{
-                    opacity: '70%',
-                    fontSize: `${fontSize}px`,
-                    padding: '2.5rem 0.5rem',
-                  }}
-                >
-                  {userInput || placeholderCode}
-                </SyntaxHighlighter>
-              </div>
-            </div>
-          </div>
-            :
-            !bgToggle && gradientToggle ? <div className='mt-10' style={{ background: `${gradientBg}` }}>
-              <div className="overflow-auto p-10">
-                <SyntaxHighlighter
-                  className="rounded-lg"
-                  language={language}
-                  style={codeThemes[codeTheme]}
-                  showLineNumbers
-                  wrapLongLines
-                  customStyle={{
-                    opacity: '70%',
-                    fontSize: `${fontSize}px`,
-                    padding: '2.5rem 0.5rem',
-                  }}
-                >
-                  {userInput || placeholderCode}
-                </SyntaxHighlighter>
-              </div>
-            </div>
-              :
-
-              bgToggle && !gradientToggle ?
-                <div className="mx-6 max-w-full overflow-hidden rounded-xl border border-black shadow-lg transition hover:shadow-md">
-                  {/* Toolbar */}
-                  <div
-                    className="flex h-10 justify-end border-b border-black"
-                    style={{ backgroundColor: uiColors[uiTheme].toolbarBg }}
+          {bgToggle && gradientToggle ? (
+            <div className="mx-6 max-w-full overflow-hidden rounded-xl border border-black shadow-lg transition hover:shadow-md">
+              {/* Toolbar */}
+              <div
+                className="flex h-10 justify-end border-b border-black"
+                style={{ backgroundColor: uiColors[uiTheme].toolbarBg }}
+              >
+                {[
+                  { Icon: Minus, label: 'Minimize', onClick: () => { } },
+                  { Icon: Copy, label: 'Copy', onClick: handleCopy },
+                  { Icon: X, label: 'Clear', onClick: handleClear },
+                ].map(({ Icon, label, onClick }, index) => (
+                  <button
+                    key={index}
+                    aria-label={label}
+                    onClick={onClick}
+                    className="flex w-10 items-center justify-center border-l border-black transition"
+                    style={{ backgroundColor: 'transparent' }}
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.backgroundColor = uiColors[uiTheme].buttonHover)
+                    }
+                    onMouseOut={(e) =>
+                      (e.currentTarget.style.backgroundColor = 'transparent')
+                    }
                   >
-                    {[
-                      { Icon: Minus, label: 'Minimize', onClick: () => { } },
-                      { Icon: Copy, label: 'Copy', onClick: handleCopy },
-                      { Icon: X, label: 'Clear', onClick: handleClear },
-                    ].map(({ Icon, label, onClick }, index) => (
-                      <button
-                        key={index}
-                        aria-label={label}
-                        onClick={onClick}
-                        className="flex w-10 items-center justify-center border-l border-black transition"
-                        style={{ backgroundColor: 'transparent' }}
-                        onMouseOver={(e) =>
-                          (e.currentTarget.style.backgroundColor = uiColors[uiTheme].buttonHover)
-                        }
-                        onMouseOut={(e) =>
-                          (e.currentTarget.style.backgroundColor = 'transparent')
-                        }
-                      >
-                        <Icon />
-                      </button>
-                    ))}
-                  </div>
-                  <div className="overflow-auto p-10">
-                    <SyntaxHighlighter
-                      className="rounded-lg"
-                      language={language}
-                      style={codeThemes[codeTheme]}
-                      showLineNumbers
-                      wrapLongLines
-                      customStyle={{
-                        opacity: '70%',
-                        fontSize: `${fontSize}px`,
-                        padding: '2.5rem 0.5rem',
-                      }}
-                    >
-                      {userInput || placeholderCode}
-                    </SyntaxHighlighter>
-                  </div>
-                </div>
-                :
+                    <Icon />
+                  </button>
+                ))}
+              </div>
+
+              <div style={{ background: `${gradientBg}` }}>
                 <div className="overflow-auto p-10">
+                  <div className='flex absolute z-10 py-5.5 mx-3.5 gap-2'>
+                    <span className='w-2.5 h-2.5  z-50 rounded-full bg-red-400' />
+                    <span className='w-2.5 h-2.5  z-50 rounded-full bg-yellow-400' />
+                    <span className='w-2.5 h-2.5  z-50 rounded-full bg-green-400' />
+                  </div>
                   <SyntaxHighlighter
                     className="rounded-lg"
                     language={language}
@@ -330,7 +252,7 @@ createRoot(document.getElementById('root')).render(<App />)
                     showLineNumbers
                     wrapLongLines
                     customStyle={{
-                      opacity: '70%',
+                      opacity: '75%',
                       fontSize: `${fontSize}px`,
                       padding: '2.5rem 0.5rem',
                     }}
@@ -338,11 +260,110 @@ createRoot(document.getElementById('root')).render(<App />)
                     {userInput || placeholderCode}
                   </SyntaxHighlighter>
                 </div>
-          }
+              </div>
+            </div>
+          ) : !bgToggle && gradientToggle ? (
+            <div className="mt-10" style={{ background: `${gradientBg}` }}>
+              <div className="overflow-auto p-10">
+                <div className='flex absolute z-10 py-5.5 mx-3.5 gap-2'>
+                  <span className='w-2.5 h-2.5  z-50 rounded-full bg-red-400' />
+                  <span className='w-2.5 h-2.5  z-50 rounded-full bg-yellow-400' />
+                  <span className='w-2.5 h-2.5  z-50 rounded-full bg-green-400' />
+                </div>
+                <SyntaxHighlighter
+                  className="rounded-lg"
+                  language={language}
+                  style={codeThemes[codeTheme]}
+                  showLineNumbers
+                  wrapLongLines
+                  customStyle={{
+                    opacity: '70%',
+                    fontSize: `${fontSize}px`,
+                    padding: '2.5rem 0.5rem',
+                  }}
+                >
+                  {userInput || placeholderCode}
+                </SyntaxHighlighter>
+              </div>
+            </div>
+          ) : bgToggle && !gradientToggle ? (
+            <div className="mx-6 max-w-full overflow-hidden rounded-xl border border-black shadow-lg transition hover:shadow-md">
+              {/* Toolbar */}
+              <div
+                className="flex h-10 justify-end border-b border-black"
+                style={{ backgroundColor: uiColors[uiTheme].toolbarBg }}
+              >
+                {[
+                  { Icon: Minus, label: 'Minimize', onClick: () => { } },
+                  { Icon: Copy, label: 'Copy', onClick: handleCopy },
+                  { Icon: X, label: 'Clear', onClick: handleClear },
+                ].map(({ Icon, label, onClick }, index) => (
+                  <button
+                    key={index}
+                    aria-label={label}
+                    onClick={onClick}
+                    className="flex w-10 items-center justify-center border-l border-black transition"
+                    style={{ backgroundColor: 'transparent' }}
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.backgroundColor = uiColors[uiTheme].buttonHover)
+                    }
+                    onMouseOut={(e) =>
+                      (e.currentTarget.style.backgroundColor = 'transparent')
+                    }
+                  >
+                    <Icon />
+                  </button>
+                ))}
+              </div>
+              <div className="overflow-auto shadow-2xl p-10">
+                <div className='flex absolute z-10 py-5.5 mx-3.5 gap-2'>
+                  <span className='w-2.5 h-2.5  z-50 rounded-full bg-red-400' />
+                  <span className='w-2.5 h-2.5  z-50 rounded-full bg-yellow-400' />
+                  <span className='w-2.5 h-2.5  z-50 rounded-full bg-green-400' />
+                </div>
+                <SyntaxHighlighter
+                  className="rounded-lg shadow-2xl"
+                  language={language}
+                  style={codeThemes[codeTheme]}
+                  showLineNumbers
+                  wrapLongLines
+                  customStyle={{
+                    opacity: '70%',
+                    fontSize: `${fontSize}px`,
+                    padding: '2.5rem 0.5rem',
+                  }}
+                >
+                  {userInput || placeholderCode}
+                </SyntaxHighlighter>
+              </div>
+            </div>
+          ) : (
+            <div className="overflow-auto p-10">
+              <div className='flex absolute z-10 py-5.5 mx-3.5 gap-2'>
+                <span className='w-2.5 h-2.5  z-50 rounded-full bg-red-400' />
+                <span className='w-2.5 h-2.5  z-50 rounded-full bg-yellow-400' />
+                <span className='w-2.5 h-2.5  z-50 rounded-full bg-green-400' />
+              </div>
+              <SyntaxHighlighter
+                className="rounded-lg"
+                language={language}
+                style={codeThemes[codeTheme]}
+                showLineNumbers
+                wrapLongLines
+                customStyle={{
+                  opacity: '70%',
+                  fontSize: `${fontSize}px`,
+                  padding: '2.7rem 0.8rem',
+                }}
+              >
+                {userInput || placeholderCode}
+
+              </SyntaxHighlighter>
+            </div>
+          )}
         </div>
         <Footer {...gradientProps} />
-
-      </main >
+      </main>
     </>
   );
 }

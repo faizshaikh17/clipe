@@ -53,8 +53,10 @@ body::-webkit-scrollbar {
     display: inline-block;
     width: 43px;
     height: 25px;
-    background-color: gainsboro;
-    border-radius: 0.9rem;
+    background-color: black;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .toggle input {
@@ -63,12 +65,7 @@ body::-webkit-scrollbar {
     height: 0;
 }
 
-input:checked .toggle {
-    background-color: black;
-}
-
-
-slider {
+.slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -91,10 +88,10 @@ slider {
     border-radius: 50%;
 }
 
-input:checked+.slider {
-    background-color: black;
+input:checked + .slider:before {
+    transform: translateX(-18px);
 }
 
-input:checked+.slider:before {
-    transform: translateX(-18px);
+.toggle:has(input:checked) {
+    background-color: gainsboro;
 }

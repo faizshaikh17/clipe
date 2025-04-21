@@ -33,7 +33,7 @@ export default function Footer({ gradients, setGradientBg, uiThemes, setUiTheme,
   }
 
   return (
-    <div className="fixed bottom-2 h-25 w-[55%] m-1 border overflow-hidden border-gray-400 shadow-[4px_4px_0px_0px_black] transition focus:shadow-xs focus:outline-none hover:shadow-none">
+    <div className="fixed  bottom-2 h-25 w-[55%] m-1 border overflow-hidden border-gray-400 shadow-[4px_4px_0px_0px_black] transition focus:shadow-xs focus:outline-none hover:shadow-none">
       <div className="flex inset-0 backdrop-blur-lg items-center justify-between px-5 py-5">
         <div className="flex flex-col items-start space-y-2">
           <label className="px-1 text-xs font-semibold text-black" htmlFor="Gradients">Gradient</label>
