@@ -50,7 +50,7 @@ export default function Footer({ gradients, setGradientBg, uiThemes, setUiTheme,
     }
   };
 
-  
+
   return (
     <div className="fixed bottom-4 w-[65%] mx-1 border rounded-md border-gray-400 shadow-[4px_4px_0px_0px_black] transition focus:shadow-xs focus:outline-none hover:shadow-none overflow-hidden">
       <div className="flex inset-0 backdrop-blur-lg items-center justify-between px-5 py-5">
@@ -98,7 +98,7 @@ export default function Footer({ gradients, setGradientBg, uiThemes, setUiTheme,
         </div>
         <div className="flex flex-col items-start space-y-2">
           <label className="px-1 text-xs font-semibold text-black" htmlFor="fontSize">Download</label>
-          <button onClick={exportImage} className="h-8 w-20 rounded-md border text-white bg-black px-2 text-sm font-semibold text-[0.8rem] focus:border-black focus:outline-none">export</button>
+          <button onClick={(e) => exportImage} className="h-8 w-20 rounded-md border text-white bg-black px-2 text-sm font-semibold text-[0.8rem] focus:border-black focus:outline-none">export</button>
         </div>
         <div className="flex flex-col items-start space-y-2">
           <label className="px-1 text-xs font-semibold text-black" htmlFor="fontSize">Window</label>
