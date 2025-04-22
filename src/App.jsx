@@ -157,8 +157,8 @@ export default function App() {
 
   const [userInput, setUserInput] = useState('');
   const [codeTheme, setCodeTheme] = useState("atomDark");
-  const [gradientBg, setGradientBg] = useState(gradients.bluePrism);
-  const [uiTheme, setUiTheme] = useState("tangerineTwist");
+  const [gradientBg, setGradientBg] = useState(gradients.amberGlow);
+  const [uiTheme, setUiTheme] = useState("zestyHorizon");
   const [fontSize, setFontSize] = useState(14);
   const [language, setLanguage] = useState('javascript');
   const [bgToggle, setBgToggle] = useState(true);
