@@ -71,7 +71,7 @@ export default function Footer({ gradients, setGradientBg, uiThemes, setUiTheme,
           </select>
         </div>
         <div className="flex flex-col items-start space-y-2">
-          <label className="px-1 text-xs font-semibold text-black" htmlFor="themeSelect">Code Theme</label>
+          <label className="px-1 text-xs font-semibold text-black" htmlFor="themeSelect">Code</label>
           <select className="h-8 w-21 rounded-md border bg-gray-100 px-2 text-sm font-semibold text-black text-[0.8rem] focus:border-black focus:outline-none" id="themeSelect">
             {Object.keys(codeThemes).map((item) => (
               <option onClick={(e) => setCodeTheme(e.target.value)} key={item} value={item}>{item}</option>
@@ -87,7 +87,7 @@ export default function Footer({ gradients, setGradientBg, uiThemes, setUiTheme,
           </select>
         </div>
         <div className="flex flex-col items-start space-y-2">
-          <label className="px-1 text-xs font-semibold text-black" htmlFor="fontSize">Font size</label>
+          <label className="px-1 text-xs font-semibold text-black" htmlFor="fontSize">Fontsize</label>
           <span className="flex h-8 w-15 items-center justify-between gap-1 rounded-md border bg-gray-100 px-2 text-sm font-semibold text-black text-[0.8rem] focus:border-black focus:outline-none">
             <span>{fontSize}</span>
             <div className="flex flex-col space-y-0.5">
