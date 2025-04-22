@@ -156,9 +156,9 @@ export default function App() {
   };
 
   const [userInput, setUserInput] = useState('');
-  const [codeTheme, setCodeTheme] = useState("a11yDark");
-  const [gradientBg, setGradientBg] = useState(gradients.pastelAurora);
-  const [uiTheme, setUiTheme] = useState("limeFiesta");
+  const [codeTheme, setCodeTheme] = useState("atomDark");
+  const [gradientBg, setGradientBg] = useState(gradients.bluePrism);
+  const [uiTheme, setUiTheme] = useState("tangerineTwist");
   const [fontSize, setFontSize] = useState(14);
   const [language, setLanguage] = useState('javascript');
   const [bgToggle, setBgToggle] = useState(true);
