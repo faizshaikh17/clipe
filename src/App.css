@@ -5,12 +5,11 @@
     /* color: #; */
     margin: 0 auto;
     padding: 0 auto;
-    background-color: #FFFFFF;
+    background-color: #f0f0f0;
     font-family: "Bricolage Grotesque", sans-serif;
     /* font-family: "Poppins", sans-serif; */
-    letter-spacing: 0.02rem;
+    letter-spacing: 5%;
     width: 100%;
-    /* font-size: 0.9rem; */
 }
 
 @font-face {
