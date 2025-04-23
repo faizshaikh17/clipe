@@ -23,10 +23,11 @@ import {
   vscDarkPlus,
   xonokai,
   a11yDark,
-  cb
+  cb,
 } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 export default function App() {
+  // UI Themes Configuration
   const uiThemes = {
     googiePop: {
       toolbarBg: '#2DD4BF',
@@ -99,9 +100,10 @@ export default function App() {
       buttonHover: '#FA63B1',
       codeBg: '#F0E6FF',
       textColor: '#2A1C4A',
-    }
+    },
   };
 
+  // Gradient Backgrounds
   const gradients = {
     amberGlow: 'linear-gradient(107.7deg, rgba(235,230,44,0.55) 8.4%, rgba(252,152,15,1) 90.3%)',
     crimsonDusk: 'linear-gradient(109.6deg, rgba(204,0,0,1) 11.2%, rgba(68,0,0,1) 100.6%)',
@@ -114,8 +116,10 @@ export default function App() {
     coralEmber: 'linear-gradient(97.3deg, rgba(25,50,70,0.81) 10.7%, rgba(155,65,25,0.72) 39.5%, rgba(255,192,0,0.81) 69.7%)',
     aquaShadow: 'linear-gradient(113.7deg, rgba(90,173,173,1) 16.4%, rgba(0,0,0,1) 99.7%)',
     blackenedNight: '#000000',
-    pureWhite: '#ffffff'
+    pureWhite: '#ffffff',
   };
+
+  // Code Syntax Themes
   const codeThemes = {
     a11yDark,
     prism,
@@ -135,9 +139,10 @@ export default function App() {
     vs,
     vscDarkPlus,
     xonokai,
-    cb
+    cb,
   };
 
+  // Supported Languages
   const languages = {
     JavaScript: 'javascript',
     Bash: 'bash',
@@ -155,56 +160,77 @@ export default function App() {
     HTML: 'xml',
   };
 
+  // State Management
   const [userInput, setUserInput] = useState('');
-  const [codeTheme, setCodeTheme] = useState("atomDark");
+  const [codeTheme, setCodeTheme] = useState('atomDark');
   const [gradientBg, setGradientBg] = useState(gradients.amberGlow);
-  const [uiTheme, setUiTheme] = useState("zestyHorizon");
+  const [uiTheme, setUiTheme] = useState('zestyHorizon');
   const [fontSize, setFontSize] = useState(14);
   const [language, setLanguage] = useState('javascript');
   const [bgToggle, setBgToggle] = useState(true);
   const [gradientToggle, setGradientToggle] = useState(true);
+  const [url, setUrl] = useState(null);
+  const [image, setImage] = useState('');
+  const [cross, setCross] = useState(true);
   const exportRef = useRef(null);
 
+  // UI Colors Utility
   const uiColor = () => {
-    const uiColorsKeys = Object.keys(uiThemes).map(item => (item));
-    const uiColorsValues = Object.values(uiThemes).map(item => (item));
-    const uiColor = Object.fromEntries(
-      uiColorsKeys.map((key, i) => [key, uiColorsValues[i]])
-    );
-    return uiColor;
+    const uiColorsKeys = Object.keys(uiThemes);
+    const uiColorsValues = Object.values(uiThemes);
+    return Object.fromEntries(uiColorsKeys.map((key, i) => [key, uiColorsValues[i]]));
   };
-
   const uiColors = uiColor();
 
+  // Placeholder Code
   const placeholderCode = `function greet() {
     const name = prompt("What's your name?");
-    alert(\`Welcome to Clip, \${name}!\`);
+    alert(\`Welcome to Clipe, \${name}!\`);
   }`;
 
+  // Event Handlers
   const handleCopy = () => {
     navigator.clipboard.writeText(userInput || placeholderCode);
+  };
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(url);
   };
 
   const handleClear = () => {
     setUserInput('');
   };
 
-  const gradientProps = {
-    gradients: gradients,
-    setGradientBg: setGradientBg,
-    uiThemes: uiThemes,
-    setUiTheme: setUiTheme,
-    codeThemes: codeThemes,
-    setCodeTheme: setCodeTheme,
-    fontSize: fontSize,
-    setFontSize: setFontSize,
-    languages: languages,
-    setLanguage: setLanguage,
-    setBgToggle: setBgToggle,
-    setGradientToggle: setGradientToggle,
-    exportRef: exportRef,
+  const handleLinkToggle = () => {
+    setUrl(null);
   };
 
+  // Gradient Properties for Footer
+  const gradientProps = {
+    gradients,
+    setGradientBg,
+    uiThemes,
+    setUiTheme,
+    codeThemes,
+    setCodeTheme,
+    fontSize,
+    setFontSize,
+    languages,
+    setLanguage,
+    setBgToggle,
+    setGradientToggle,
+    exportRef,
+    url,
+    setUrl,
+    image,
+    setImage,
+  };
+
+  // Debug Logs
+  console.log(url);
+  console.log(cross);
+
+  // Render
   return (
     <>
       <Header />
@@ -215,16 +241,19 @@ export default function App() {
         <div className="mt-10 flex w-[31%] flex-col items-center justify-center space-y-6">
           <CodeArea userInput={userInput} setUserInput={setUserInput} />
         </div>
-        <div id='hero' ref={exportRef} className="flex justify-center">
+
+        <div id="hero" className="flex justify-center">
           {bgToggle && gradientToggle ? (
-            <div className="max-w-7xl overflow-hidden rounded-xl border border-black shadow-lg transition hover:shadow-md">
-              {/* Toolbar */}
+            <div
+              ref={exportRef}
+              className="max-w-7xl overflow-hidden rounded-lg border border-black shadow-lg transition hover:shadow-md"
+            >
               <div
                 className="flex h-10 justify-end border-b border-black"
                 style={{ backgroundColor: uiColors[uiTheme].toolbarBg }}
               >
                 {[
-                  { Icon: Minus, label: 'Minimize', onClick: () => { } },
+                  { Icon: Minus, label: 'Minimize', onClick: () => {} },
                   { Icon: Copy, label: 'Copy', onClick: handleCopy },
                   { Icon: X, label: 'Clear', onClick: handleClear },
                 ].map(({ Icon, label, onClick }, index) => (
@@ -233,25 +262,27 @@ export default function App() {
                     aria-label={label}
                     title={label}
                     onClick={onClick}
-                    className="flex w-10 items-center justify-center border-l border-black transition hover:bg-[uiColors[uiTheme].buttonHover]"
+                    className="flex w-10 items-center justify-center border-l border-black transition"
                     style={{ backgroundColor: 'transparent' }}
                     onMouseOver={(e) =>
                       (e.currentTarget.style.backgroundColor = uiColors[uiTheme].buttonHover)
                     }
-                    onMouseOut={(e) =>
-                      (e.currentTarget.style.backgroundColor = 'transparent')
-                    }
+                    onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
                   >
                     <Icon />
                   </button>
                 ))}
               </div>
-              <div className="w-full p-8" style={{ background: `${gradientBg}` }}>
-                <div className="relative overflow-auto">
-                  <div className={`flex absolute ${fontSize >= 30 ? 'top-10 left-5' : 'top-5 left-3.5'}   gap-2`}>
-                    <span className="w-2.5 h-2.5 rounded-full bg-red-400 z-50" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-400 z-50" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-green-400 z-50" />
+              <div className="w-full p-8" style={{ background: gradientBg }}>
+                <div className="relative rounded-lg overflow-auto">
+                  <div
+                    className={`flex z-1 absolute gap-2 ${
+                      fontSize >= 30 ? 'top-10 left-5' : 'top-5 left-3.5'
+                    }`}
+                  >
+                    <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
                   </div>
                   <SyntaxHighlighter
                     className="rounded-lg"
@@ -271,12 +302,16 @@ export default function App() {
               </div>
             </div>
           ) : !bgToggle && gradientToggle ? (
-            <div ref={exportRef} className="max-w-7xl" style={{ background: `${gradientBg}` }}>
+            <div ref={exportRef} className="max-w-7xl" style={{ background: gradientBg }}>
               <div className="relative overflow-auto p-10">
-                <div className={`flex absolute ${fontSize >= 30 ? 'top-10 left-5' : 'top-15 left-13'}   gap-2`}>
-                  <span className="w-2.5 h-2.5 rounded-full bg-red-400 z-50" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-400 z-50" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-green-400 z-50" />
+                <div
+                  className={`flex z-1 absolute gap-2 ${
+                    fontSize >= 30 ? 'top-10 left-5' : 'top-15 left-13'
+                  }`}
+                >
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
                 </div>
                 <SyntaxHighlighter
                   className="rounded-lg"
@@ -295,15 +330,17 @@ export default function App() {
               </div>
             </div>
           ) : bgToggle && !gradientToggle ? (
-            <div ref={exportRef} style={{ backgroundColor: uiColors[uiTheme].codeBg }}
-              className="max-w-7xl overflow-hidden rounded-xl border border-black shadow-lg transition hover:shadow-md">
-              {/* Toolbar */}
+            <div
+              ref={exportRef}
+              style={{ backgroundColor: uiColors[uiTheme].codeBg }}
+              className="max-w-7xl overflow-hidden rounded-xl border border-black shadow-lg transition hover:shadow-md"
+            >
               <div
                 className="flex h-10 justify-end border-b border-black"
                 style={{ backgroundColor: uiColors[uiTheme].toolbarBg }}
               >
                 {[
-                  { Icon: Minus, label: 'Minimize', onClick: () => { } },
+                  { Icon: Minus, label: 'Minimize', onClick: () => {} },
                   { Icon: Copy, label: 'Copy', onClick: handleCopy },
                   { Icon: X, label: 'Clear', onClick: handleClear },
                 ].map(({ Icon, label, onClick }, index) => (
@@ -311,24 +348,26 @@ export default function App() {
                     key={index}
                     aria-label={label}
                     onClick={onClick}
-                    className="flex w-10 items-center justify-center border-l border-black transition hover:bg-[uiColors[uiTheme].buttonHover]"
+                    className="flex w-10 items-center justify-center border-l border-black transition"
                     style={{ backgroundColor: 'transparent' }}
                     onMouseOver={(e) =>
                       (e.currentTarget.style.backgroundColor = uiColors[uiTheme].buttonHover)
                     }
-                    onMouseOut={(e) =>
-                      (e.currentTarget.style.backgroundColor = 'transparent')
-                    }
+                    onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
                   >
                     <Icon />
                   </button>
                 ))}
               </div>
-              <div className="relative overflow-auto p-10">
-                <div className={`flex absolute ${fontSize >= 30 ? 'top-10 left-5' : 'top-15 left-13'}   gap-2`}>
-                  <span className="w-2.5 h-2.5 rounded-full bg-red-400 z-50" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-400 z-50" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-green-400 z-50" />
+              <div className="relative overflow-auto rounded-lg p-10">
+                <div
+                  className={`flex z-1 absolute gap-2 ${
+                    fontSize >= 30 ? 'top-10 left-5' : 'top-15 left-13'
+                  }`}
+                >
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
                 </div>
                 <SyntaxHighlighter
                   className="rounded-lg"
@@ -347,30 +386,50 @@ export default function App() {
               </div>
             </div>
           ) : (
-            <div ref={exportRef} className="relative max-w-7xl  rounded-lg shadow-black shadow-2xl overflow-auto">
-              <div className={`flex absolute ${fontSize >= 30 ? 'top-10 left-5' : 'top-3 left-3'}   gap-2`}>
-                <span className="w-2.5 h-2.5 rounded-full bg-red-400 z-50" />
-                <span className="w-2.5 h-2.5 rounded-full bg-yellow-400 z-50" />
-                <span className="w-2.5 h-2.5 rounded-full bg-green-400 z-50" />
+            <div ref={exportRef} className="rounded-lg">
+              <div className="relative max-w-7xl transparent rounded-lg shadow-black shadow-2xl overflow-hidden">
+                <div
+                  className={`flex z-1 absolute gap-2 ${
+                    fontSize >= 30 ? 'top-10 left-5' : 'top-3 left-3'
+                  }`}
+                >
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
+                </div>
+                <SyntaxHighlighter
+                  className="rounded-lg"
+                  language={language}
+                  style={codeThemes[codeTheme]}
+                  showLineNumbers
+                  wrapLongLines
+                  customStyle={{
+                    opacity: '70%',
+                    fontSize: `${fontSize}px`,
+                    padding: '2.5rem 0.5rem',
+                    margin: '0',
+                  }}
+                >
+                  {userInput || placeholderCode}
+                </SyntaxHighlighter>
               </div>
-              <SyntaxHighlighter
-                className="rounded-lg"
-                language={language}
-                style={codeThemes[codeTheme]}
-                showLineNumbers
-                wrapLongLines
-                customStyle={{
-                  opacity: '70%',
-                  fontSize: `${fontSize}px`,
-                  padding: '2.5rem 0.5rem',
-                  margin: "0"
-                }}
-              >
-                {userInput || placeholderCode}
-              </SyntaxHighlighter>
             </div>
           )}
         </div>
+
+        {cross && url && (
+          <>
+            <div className="fixed inset-0 bg-white/10 backdrop-blur-xs z-[9] min-h-screen" />
+            <div className="flex items-center justify-between p-3 bg-white/50 inset-0 backdrop-blur-sm text-left z-[10] absolute left-[20%] right-[20%] top-[45%] bottom-[50%] h-20 text-black border border-[#f9f327]/20 shadow-2xl">
+              <div>{url}</div>
+              <div className="space-y-4">
+                <X size={24} onClick={handleLinkToggle} />
+                <Copy size={24} onClick={handleCopyLink} />
+              </div>
+            </div>
+          </>
+        )}
+
         <Footer {...gradientProps} />
       </main>
     </>

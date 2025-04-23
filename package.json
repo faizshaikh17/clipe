@@ -11,9 +11,14 @@
     "tailwind-init": "tailwindcss init --full"
   },
   "dependencies": {
+    "@cloudinary/react": "^1.14.1",
+    "@cloudinary/url-gen": "^1.21.0",
     "@phosphor-icons/react": "^2.1.7",
     "@tailwindcss/vite": "^4.1.4",
+    "axios": "^1.8.4",
+    "cloudinary": "^2.6.0",
     "dom-to-image": "^2.6.0",
+    "dotenv": "^16.5.0",
     "html-to-image": "^1.11.13",
     "html2canvas": "^1.4.1",
     "html2canvas-pro": "^1.5.8",
