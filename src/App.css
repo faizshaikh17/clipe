@@ -12,7 +12,6 @@
   background-color: var(--background-color);
   margin: 0 auto;
   padding: 0;
-  font-family: "Consolas", monospace;
   letter-spacing: 0.05em;
   width: 100%;
 }
@@ -20,12 +19,14 @@
 html,
 body {
   overflow: auto;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
+  display: none;
+  /* Chrome, Safari, Edge */
 }
 
 .toggle {
@@ -33,7 +34,8 @@ body::-webkit-scrollbar {
   display: inline-block;
   width: 43px;
   height: 25px;
-  background-color: gray;
+  background-color: darkgrey;
+
   border-radius: 14px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -67,12 +69,13 @@ body::-webkit-scrollbar {
   transition: transform 0.2s ease;
 }
 
-.toggle input:checked + .slider:before {
+.toggle input:checked+.slider:before {
   transform: translateX(-18px);
 }
 
 .toggle:has(input:checked) {
   background-color: gainsboro;
+
 }
 
 
@@ -98,3 +101,11 @@ body::-webkit-scrollbar {
     font-style: normal;
     font-optical-sizing: auto;
 }  */
+
+
+.font {
+  font-family: "BricolageGrotesque", sans-serif;
+  src: url('/assets/BricolageGrotesque_24pt-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}

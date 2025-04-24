@@ -92,12 +92,12 @@ export default function Footer({
 
   // Render
   return (
-    <div className="fixed bottom-4 w-[60%] mx-1 border rounded-md border-gray-400 shadow-[4px_4px_0px_0px_black] transition focus:shadow-xs focus:outline-none hover:shadow-none overflow-hidden">
-      <div className="flex flex-wrap gap-3 inset-0 backdrop-blur-lg items-center justify-between px-5 py-5">
+    <div className=" sm:fixed w-[21rem] bottom-4 sm:h-25 h-56 sm:w-[55rem] mx-1 border rounded-md border-gray-400 shadow-[4px_4px_0px_0px_black] transition focus:shadow-xs focus:outline-none hover:shadow-none overflow-hidden">
+      <div className="flex flex-wrap gap-2 sm:gap-4 inset-0 backdrop-blur-lg items-center justify-between px-4 py-5">
 
         {/* Gradient Selector */}
-        <div className="flex flex-col items-start space-y-2">
-          <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="Gradients">
+        <div className="flex flex-col items-start space-y-1">
+          <label className="px-1 text-xs font-semibold  dark:text-white text-black" htmlFor="Gradients">
             Gradient
           </label>
           <select
@@ -120,7 +120,7 @@ export default function Footer({
         </div>
 
         {/* UI Theme Selector */}
-        <div className="flex flex-col items-start space-y-2">
+        <div className="flex flex-col items-start space-y-1">
           <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="UiThemes">
             Ui Theme
           </label>
@@ -143,7 +143,7 @@ export default function Footer({
         </div>
 
         {/* Code Theme Selector */}
-        <div className="flex flex-col items-start space-y-2">
+        <div className="flex flex-col items-start space-y-1">
           <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="themeSelect">
             Code
           </label>
@@ -164,7 +164,7 @@ export default function Footer({
         </div>
 
         {/* Language Selector */}
-        <div className="flex flex-col items-start space-y-2">
+        <div className="flex flex-col items-start space-y-1">
           <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="themeSelect">
             Language
           </label>
@@ -185,7 +185,7 @@ export default function Footer({
               ))}
           </select>
         </div>
-        <div className="flex flex-col items-start space-y-2">
+        <div className="flex flex-col items-start space-y-1">
           <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="fontSize">
             Window
           </label>
@@ -196,7 +196,7 @@ export default function Footer({
         </div>
 
         {/* Background Toggle */}
-        <div className="flex flex-col items-start space-y-2">
+        <div className="flex flex-col items-start space-y-1">
           <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="fontSize">
             Background
           </label>
@@ -206,7 +206,7 @@ export default function Footer({
           </label>
         </div>
         {/* Font Size Control */}
-        <div className="flex flex-col items-start space-y-2">
+        <div className="flex flex-col items-start space-y-1">
           <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="fontSize">
             Fontsize
           </label>
@@ -224,7 +224,7 @@ export default function Footer({
         </div>
 
         {/* Download Options */}
-        <div className="flex flex-col items-start space-y-2">
+        <div className="flex flex-col items-start space-y-1">
           <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="fontSize">
             Download
           </label>

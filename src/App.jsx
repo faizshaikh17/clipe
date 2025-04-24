@@ -118,10 +118,10 @@ export default function App() {
     <ThemeProvider value={{ themeMode, lightTheme, darkTheme }}>
       <Header />
       <main
-        className={`flex flex-col items-center justify-start bg-${uiColors[uiTheme].codeBg} space-y-12 min-h-[91svh] w-full transition duration-500 text-black dark:text-white dark:bg-[#171717]`}
+        className={`flex font flex-col items-center justify-start bg-${uiColors[uiTheme].codeBg} space-y-12 min-h-[91svh] w-full transition duration-500 text-black dark:text-white dark:bg-[#171717]`}
         style={{ backgroundColor: themeMode === 'dark' ? '#121212' : uiColors[uiTheme].codeBg, color: uiColors[uiTheme].textColor }}
       >
-        <div className="mt-10 flex w-[31%] flex-col items-center justify-center space-y-6">
+        <div className="mt-10 flex sm:w-[30rem] w-[21rem] flex-col items-center justify-center space-y-6">
           <CodeArea userInput={userInput} setUserInput={setUserInput} />
         </div>
 
@@ -131,7 +131,7 @@ export default function App() {
           {bgToggle && gradientToggle ? (
             <div
               ref={exportRef}
-              className="max-w-7xl overflow-hidden rounded-lg border border-black shadow-lg transition hover:shadow-md"
+              className="max-w-7xl sm:w-[30rem] w-[21rem] overflow-hidden rounded-lg border border-black shadow-lg transition hover:shadow-md"
             >
               <div
                 className="flex h-10 justify-end border-b border-black"
