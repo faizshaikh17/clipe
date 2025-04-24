@@ -17,9 +17,7 @@ export default function Footer({
   setBgToggle,
   setGradientToggle,
   exportRef,
-  url,
   setUrl,
-  image,
   setImage,
 }) {
   // Event Handlers
@@ -95,9 +93,11 @@ export default function Footer({
   // Render
   return (
     <div className="fixed bottom-4 w-[60%] mx-1 border rounded-md border-gray-400 shadow-[4px_4px_0px_0px_black] transition focus:shadow-xs focus:outline-none hover:shadow-none overflow-hidden">
-      <div className="flex inset-0 backdrop-blur-lg items-center justify-between px-5 py-5">
+      <div className="flex flex-wrap gap-3 inset-0 backdrop-blur-lg items-center justify-between px-5 py-5">
+
+        {/* Gradient Selector */}
         <div className="flex flex-col items-start space-y-2">
-          <label className="px-1 text-xs font-semibold text-black" htmlFor="Gradients">
+          <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="Gradients">
             Gradient
           </label>
           <select
@@ -105,13 +105,13 @@ export default function Footer({
             name="Gradients"
           >
             {Object.entries(gradients)
-              .map(([Key, value]) => ({ id: Key, value }))
+              .map(([id, value]) => ({ id, value }))
               .map((item) => (
                 <option
-                  onClick={() => setGradientValue(item)}
                   key={item.id}
                   id={item.id}
                   value={item.value}
+                  onClick={() => setGradientValue(item)}
                 >
                   {item.id}
                 </option>
@@ -119,8 +119,9 @@ export default function Footer({
           </select>
         </div>
 
+        {/* UI Theme Selector */}
         <div className="flex flex-col items-start space-y-2">
-          <label className="px-1 text-xs font-semibold text-black" htmlFor="UiThemes">
+          <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="UiThemes">
             Ui Theme
           </label>
           <select
@@ -128,7 +129,7 @@ export default function Footer({
             name="UiThemes"
           >
             {Object.entries(uiThemes)
-              .map(([key, { ...value }]) => ({ id: key, value: { ...value } }))
+              .map(([id, value]) => ({ id, value }))
               .map((item) => (
                 <option
                   key={item.id}
@@ -141,8 +142,9 @@ export default function Footer({
           </select>
         </div>
 
+        {/* Code Theme Selector */}
         <div className="flex flex-col items-start space-y-2">
-          <label className="px-1 text-xs font-semibold text-black" htmlFor="themeSelect">
+          <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="themeSelect">
             Code
           </label>
           <select
@@ -151,9 +153,9 @@ export default function Footer({
           >
             {Object.keys(codeThemes).map((item) => (
               <option
-                onClick={(e) => setCodeTheme(e.target.value)}
                 key={item}
                 value={item}
+                onClick={(e) => setCodeTheme(e.target.value)}
               >
                 {item}
               </option>
@@ -161,8 +163,9 @@ export default function Footer({
           </select>
         </div>
 
+        {/* Language Selector */}
         <div className="flex flex-col items-start space-y-2">
-          <label className="px-1 text-xs font-semibold text-black" htmlFor="themeSelect">
+          <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="themeSelect">
             Language
           </label>
           <select
@@ -170,7 +173,7 @@ export default function Footer({
             id="themeSelect"
           >
             {Object.entries(languages)
-              .map(([key, value]) => ({ id: key, value }))
+              .map(([id, value]) => ({ id, value }))
               .map((item) => (
                 <option
                   key={item.id}
@@ -182,49 +185,8 @@ export default function Footer({
               ))}
           </select>
         </div>
-
         <div className="flex flex-col items-start space-y-2">
-          <label className="px-1 text-xs font-semibold text-black" htmlFor="fontSize">
-            Fontsize
-          </label>
-          <span className="flex h-8 w-15 items-center justify-between gap-1 rounded-md border bg-gray-100 px-2 text-sm font-semibold text-black text-[0.8rem] focus:border-black focus:outline-none">
-            <span>{fontSize}</span>
-            <div className="flex flex-col space-y-0.5">
-              <button
-                className="bg-gray-200 w-5 h-2.5 flex justify-center items-center"
-                onClick={incFontSize}
-              >
-                <ChevronUp size={14} />
-              </button>
-              <button
-                className="bg-gray-200 w-5 h-2.5 flex justify-center items-center"
-                onClick={decFontSize}
-              >
-                <ChevronDown size={14} />
-              </button>
-            </div>
-          </span>
-        </div>
-
-        <div className="flex flex-col items-start space-y-2">
-          <label className="px-1 text-xs font-semibold text-black" htmlFor="fontSize">
-            Download
-          </label>
-          <select
-            className="h-8 w-20 rounded-md border bg-gray-100 text-black px-2 text-sm font-semibold text-[0.8rem] focus:border-black focus:outline-none"
-          >
-            <option onClick={(e) => exportImage(e.target.value)} value="download">
-              Download
-            </option>
-            <option onClick={(e) => exportImage(e.target.value)} value="link">
-              Get Link
- façon
-            </option>
-          </select>
-        </div>
-
-        <div className="flex flex-col items-start space-y-2">
-          <label className="px-1 text-xs font-semibold text-black" htmlFor="fontSize">
+          <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="fontSize">
             Window
           </label>
           <label className="toggle">
@@ -233,19 +195,52 @@ export default function Footer({
           </label>
         </div>
 
+        {/* Background Toggle */}
         <div className="flex flex-col items-start space-y-2">
-          <label className="px-1 text-xs font-semibold text-black" htmlFor="fontSize">
+          <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="fontSize">
             Background
           </label>
           <label className="toggle">
-            <input
-              type="checkbox"
-              onChange={setGradientToggleValue}
-              id="toggleButton"
-            />
+            <input type="checkbox" onChange={setGradientToggleValue} id="toggleButton" />
             <span className="slider"></span>
           </label>
         </div>
+        {/* Font Size Control */}
+        <div className="flex flex-col items-start space-y-2">
+          <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="fontSize">
+            Fontsize
+          </label>
+          <span className="flex h-8 w-15 items-center justify-between gap-1 rounded-md border bg-gray-100 px-2 text-sm font-semibold text-black text-[0.8rem] focus:border-black focus:outline-none">
+            <span>{fontSize}</span>
+            <div className="flex flex-col space-y-0.5">
+              <button className="bg-gray-200 w-5 h-2.5 flex justify-center items-center" onClick={incFontSize}>
+                <ChevronUp size={14} />
+              </button>
+              <button className="bg-gray-200 w-5 h-2.5 flex justify-center items-center" onClick={decFontSize}>
+                <ChevronDown size={14} />
+              </button>
+            </div>
+          </span>
+        </div>
+
+        {/* Download Options */}
+        <div className="flex flex-col items-start space-y-2">
+          <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="fontSize">
+            Download
+          </label>
+          <select className="h-8 w-20 rounded-md border bg-gray-100 text-black px-2 text-sm font-semibold text-[0.8rem] focus:border-black focus:outline-none">
+            <option onClick={(e) => exportImage(e.target.value)} value="download">
+              Download
+            </option>
+            <option onClick={(e) => exportImage(e.target.value)} value="link">
+              Get Link
+            </option>
+          </select>
+        </div>
+
+        {/* Window Toggle */}
+
+
       </div>
     </div>
   );
