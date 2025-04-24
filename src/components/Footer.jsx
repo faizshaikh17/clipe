@@ -97,7 +97,7 @@ export default function Footer({
 
         {/* Gradient Selector */}
         <div className="flex flex-col items-start space-y-1">
-          <label className="px-1 text-xs font-semibold  dark:text-white text-black" htmlFor="Gradients">
+          <label className="px-0.5 text-xs font-semibold  dark:text-white text-black" htmlFor="Gradients">
             Gradient
           </label>
           <select
@@ -121,11 +121,11 @@ export default function Footer({
 
         {/* UI Theme Selector */}
         <div className="flex flex-col items-start space-y-1">
-          <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="UiThemes">
+          <label className="px-0.5 text-xs font-semibold dark:text-white text-black" htmlFor="UiThemes">
             Ui Theme
           </label>
           <select
-            className="h-8 w-24 rounded-md border bg-gray-100 px-2 text-sm font-semibold text-black text-[0.8rem] focus:border-black focus:outline-none"
+            className="h-8 w-26 rounded-md border bg-gray-100 px-2 text-sm font-semibold text-black text-[0.8rem] focus:border-black focus:outline-none"
             name="UiThemes"
           >
             {Object.entries(uiThemes)
@@ -144,11 +144,11 @@ export default function Footer({
 
         {/* Code Theme Selector */}
         <div className="flex flex-col items-start space-y-1">
-          <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="themeSelect">
+          <label className="px-0.5 text-xs font-semibold dark:text-white text-black" htmlFor="themeSelect">
             Code
           </label>
           <select
-            className="h-8 w-21 rounded-md border bg-gray-100 px-2 text-sm font-semibold text-black text-[0.8rem] focus:border-black focus:outline-none"
+            className="h-8 w-23 rounded-md border bg-gray-100 px-2 text-sm font-semibold text-black text-[0.8rem] focus:border-black focus:outline-none"
             id="themeSelect"
           >
             {Object.keys(codeThemes).map((item) => (
@@ -165,11 +165,11 @@ export default function Footer({
 
         {/* Language Selector */}
         <div className="flex flex-col items-start space-y-1">
-          <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="themeSelect">
+          <label className="px-0.5 text-xs font-semibold dark:text-white text-black" htmlFor="themeSelect">
             Language
           </label>
           <select
-            className="h-8 w-23 rounded-md border bg-gray-100 px-2 text-sm font-semibold text-black text-[0.8rem] focus:border-black focus:outline-none"
+            className="h-8 w-25 rounded-md border bg-gray-100 px-2 text-sm font-semibold text-black text-[0.8rem] focus:border-black focus:outline-none"
             id="themeSelect"
           >
             {Object.entries(languages)
@@ -185,29 +185,10 @@ export default function Footer({
               ))}
           </select>
         </div>
-        <div className="flex flex-col items-start space-y-1">
-          <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="fontSize">
-            Window
-          </label>
-          <label className="toggle">
-            <input type="checkbox" onChange={setToggleValue} id="toggleButton" />
-            <span className="slider"></span>
-          </label>
-        </div>
 
-        {/* Background Toggle */}
-        <div className="flex flex-col items-start space-y-1">
-          <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="fontSize">
-            Background
-          </label>
-          <label className="toggle">
-            <input type="checkbox" onChange={setGradientToggleValue} id="toggleButton" />
-            <span className="slider"></span>
-          </label>
-        </div>
         {/* Font Size Control */}
         <div className="flex flex-col items-start space-y-1">
-          <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="fontSize">
+          <label className="px-0.5 text-xs font-semibold dark:text-white text-black" htmlFor="fontSize">
             Fontsize
           </label>
           <span className="flex h-8 w-15 items-center justify-between gap-1 rounded-md border bg-gray-100 px-2 text-sm font-semibold text-black text-[0.8rem] focus:border-black focus:outline-none">
@@ -225,10 +206,10 @@ export default function Footer({
 
         {/* Download Options */}
         <div className="flex flex-col items-start space-y-1">
-          <label className="px-1 text-xs font-semibold dark:text-white text-black" htmlFor="fontSize">
+          <label className="px-0.5 text-xs font-semibold dark:text-white text-black" htmlFor="fontSize">
             Download
           </label>
-          <select className="h-8 w-20 rounded-md border bg-gray-100 text-black px-2 text-sm font-semibold text-[0.8rem] focus:border-black focus:outline-none">
+          <select className="h-8 w-24 rounded-md border bg-gray-100 text-black px-2 text-sm font-semibold text-[0.8rem] focus:border-black focus:outline-none">
             <option onClick={(e) => exportImage(e.target.value)} value="download">
               Download
             </option>
@@ -239,7 +220,26 @@ export default function Footer({
         </div>
 
         {/* Window Toggle */}
+        <div className="flex flex-col items-start space-y-1">
+          <label className="px-0.5 text-xs font-semibold dark:text-white text-black" htmlFor="fontSize">
+            Window
+          </label>
+          <label className="toggle">
+            <input type="checkbox" onChange={setToggleValue} id="toggleButton" />
+            <span className="slider"></span>
+          </label>
+        </div>
 
+        {/* Background Toggle */}
+        <div className="flex flex-col items-start space-y-1">
+          <label className="px-0.5 text-xs font-semibold dark:text-white text-black" htmlFor="fontSize">
+            Background
+          </label>
+          <label className="toggle">
+            <input type="checkbox" onChange={setGradientToggleValue} id="toggleButton" />
+            <span className="slider"></span>
+          </label>
+        </div>
 
       </div>
     </div>
