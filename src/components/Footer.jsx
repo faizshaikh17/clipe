@@ -92,7 +92,7 @@ export default function Footer({
 
   // Render
   return (
-    <div className=" sm:fixed w-[21rem] bottom-4 sm:h-25 h-56 sm:w-[55rem] mx-1 border rounded-md border-gray-400 shadow-[4px_4px_0px_0px_black] transition focus:shadow-xs focus:outline-none hover:shadow-none overflow-hidden">
+    <div className=" sm:fixed w-[21rem] bottom-4 sm:h-25 h-56 sm:w-[55rem] mx-1 border rounded-md border-gray-400 hover:shadow-[4px_4px_0px_0px_black] transition focus:shadow-xs focus:outline-none shadow-none overflow-hidden">
       <div className="flex flex-wrap gap-2 sm:gap-4 inset-0 backdrop-blur-lg items-center justify-between px-4 py-5">
 
         {/* Gradient Selector */}
