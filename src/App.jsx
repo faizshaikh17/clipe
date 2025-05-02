@@ -300,8 +300,8 @@ export default function App() {
 
         {cross && url && (
           <>
-            <div className="fixed inset-0 bg-white/10 backdrop-blur-xs z-[9] min-h-screen" />
-            <div className="absolute z-[10] left-[20%] right-[20%] top-[45%] h-20 flex items-center justify-between p-3 bg-white/50 backdrop-blur-sm text-black border border-[#f9f327]/20 shadow-2xl">
+            <div className="fixed inset-0 bg-black backdrop-blur-xs z-[9] min-h-screen" />
+            <div className="absolute z-[10] left-[20%] right-[20%] top-[45%] h-20 flex items-center justify-between p-3 text-white dark:text-black dark:bg-white/50 bg-black/70 backdrop-blur-sm border border-[#f9f327]/20 shadow-2xl">
               <div>{url}</div>
               <div className="space-y-4">
                 <X size={24} onClick={handleLinkToggle} />
