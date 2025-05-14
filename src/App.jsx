@@ -69,8 +69,8 @@ export default function App() {
   // State
   const [userInput, setUserInput] = useState('');
   const [codeTheme, setCodeTheme] = useState('atomDark');
-  const [gradientBg, setGradientBg] = useState(gradients.amberGlow);
-  const [uiTheme, setUiTheme] = useState('zestyHorizon');
+  const [gradientBg, setGradientBg] = useState(gradients.pastelAurora);
+  const [uiTheme, setUiTheme] = useState('googiePop');
   const [fontSize, setFontSize] = useState(14);
   const [language, setLanguage] = useState('javascript');
   const [bgToggle, setBgToggle] = useState(true);
@@ -112,13 +112,18 @@ export default function App() {
   };
 
   const uiColors = Object.fromEntries(Object.entries(uiThemes));
+  const [headerColor, setHeaderColor] = useState(uiColors[uiTheme].toolbarBg)
+  useEffect(() => {
+    setHeaderColor(uiColors[uiTheme].toolbarBg)
+  }, [uiTheme,uiColors])
+
 
   // --------------------------- RENDER ---------------------------
   return (
     <ThemeProvider value={{ themeMode, lightTheme, darkTheme }}>
-      <Header />
+      <Header headerColor={headerColor} />
       <main
-        className={`flex font flex-col items-center justify-start bg-${uiColors[uiTheme].codeBg} space-y-12 min-h-[91svh] w-full transition duration-500 text-black dark:text-white dark:bg-[#171717]`}
+        className={`flex font flex-col mt-15 items-center justify-start space-y-12 min-h-[91.5svh] w-full transition duration-500 text-black dark:text-white`}
         style={{ backgroundColor: themeMode === 'dark' ? '#121212' : uiColors[uiTheme].codeBg, color: uiColors[uiTheme].textColor }}
       >
         <div className="mt-10 flex sm:w-[30rem] w-[21rem] flex-col items-center justify-center space-y-6">
@@ -131,7 +136,7 @@ export default function App() {
           {bgToggle && gradientToggle ? (
             <div
               ref={exportRef}
-              className="max-w-7xl sm:w-[30rem] w-[21rem] overflow-hidden rounded-lg border border-black shadow-lg transition hover:shadow-md"
+              className="max-w-6xl min-w-[30rem] overflow-hidden rounded-lg border border-black shadow-lg transition hover:shadow-md"
             >
               <div
                 className="flex h-10 justify-end border-b border-black"
