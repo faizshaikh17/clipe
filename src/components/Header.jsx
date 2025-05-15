@@ -14,10 +14,10 @@ export default function Header({ headerColor }) {
 
   return (
     <>
-      <header className={`inset-0 font fixed h-14 z-50 backdrop-blur-lg border text-black   dark:bg-white border-black shadow-white/15 shadow-sm transition focus:shadow-xs focus:outline-none `}
+      <header className={`inset-0 font fixed h-16 z-50 backdrop-blur-lg text-black   dark:bg-white shadow-white/15 shadow-sm transition focus:shadow-xs focus:outline-none `}
       style={{ backgroundColor: headerColor }}
       >
-        <div className="flex inset-0 backdrop-blur-lg h-16 w-full items-center justify-between px-4 md:px-8 lg:px-64 py-2">
+        <div className="flex inset-0 backdrop-blur-lg h-full w-full items-center justify-between px-4 md:px-8 lg:px-64 py-2">
           <h1 className="text-base font-semibold lg:text-xl">Clipe.</h1>
           <div className="flex items-center gap-2">
             <h1 className="text-xs sm:text-sm">

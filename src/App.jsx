@@ -123,7 +123,7 @@ export default function App() {
     <ThemeProvider value={{ themeMode, lightTheme, darkTheme }}>
       <Header headerColor={headerColor} />
       <main
-        className={`flex font flex-col mt-15 items-center justify-start space-y-12 min-h-[91.5svh] w-full transition duration-500 text-black dark:text-white`}
+        className={`flex font flex-col mt-15 items-center justify-start space-y-12 min-h-svh w-full transition duration-500 text-black dark:text-white`}
         style={{ backgroundColor: themeMode === 'dark' ? '#121212' : uiColors[uiTheme].codeBg, color: uiColors[uiTheme].textColor }}
       >
         <div className="mt-10 flex sm:w-[30rem] w-[21rem] flex-col items-center justify-center space-y-6">
