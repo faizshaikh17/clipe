@@ -34,7 +34,7 @@ body::-webkit-scrollbar {
   display: inline-block;
   width: 35px;
   height: 20px;
-  background-color: darkgrey;
+  background-color: gray;
 
   border-radius: 14px;
   cursor: pointer;
@@ -63,7 +63,7 @@ body::-webkit-scrollbar {
   height: 15px;
   width: 15px;
   right: 2.5px;
-  bottom: 2px;
+  bottom: 3px;
   background-color: white;
   border-radius: 50%;
   transition: transform 0.2s ease;
