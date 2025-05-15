@@ -21,9 +21,7 @@ export default function Footer({
 }) {
   // Event Handlers
   const setGradientValue = (option) => {
-    console.log(option.value);
-
-    setGradientBg(option.value);
+    setGradientBg(option);
   };
 
   const setUiThemeValue = (id) => {
@@ -106,7 +104,7 @@ export default function Footer({
             name="Gradients"
             onChange={(e) => {
               const value = e.target.value
-              setGradientBg(value)
+              setGradientValue(value)
             }}
           >
             {Object.entries(gradients)
