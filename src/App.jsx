@@ -115,8 +115,8 @@ export default function App() {
   const [headerColor, setHeaderColor] = useState(uiColors[uiTheme].toolbarBg)
   useEffect(() => {
     setHeaderColor(uiColors[uiTheme].toolbarBg)
-  }, [uiTheme,uiColors])
-console.log(gradientBg)
+  }, [uiTheme, uiColors])
+  console.log(gradientBg)
 
 
   // --------------------------- RENDER ---------------------------
@@ -306,12 +306,12 @@ console.log(gradientBg)
 
         {cross && url && (
           <>
-            <div className="fixed inset-0 bg-black backdrop-blur-xs z-[9] min-h-screen" />
-            <div className="absolute z-[10] left-[20%] right-[20%] top-[45%] h-20 flex items-center justify-between p-3 text-white dark:text-black dark:bg-white/50 bg-black/70 backdrop-blur-sm border border-[#f9f327]/20 shadow-2xl">
-              <div>{url}</div>
-              <div className="space-y-4">
-                <X size={24} onClick={handleLinkToggle} />
-                <Copy size={24} onClick={handleCopyLink} />
+            <div className=" inset-0 fixed backdrop-blur-xs z-[9] min-h-screen" />
+            <div className="absolute z-[10] top-1/2 h-20 flex gap-6 items-center justify-between p-4 text-white dark:text-black dark:bg-white/50 bg-black/70 backdrop-blur-sm border border-[#f9f327]/20 shadow-2xl">
+              <p className=" break-all text-sm">{url}</p>
+              <div className=" right-0 space-y-4">
+                <X className='cursor-pointer' size={24} onClick={handleLinkToggle} />
+                <Copy className='cursor-pointer' size={24} onClick={handleCopyLink} />
               </div>
             </div>
           </>
