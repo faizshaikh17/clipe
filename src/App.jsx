@@ -116,6 +116,7 @@ export default function App() {
   useEffect(() => {
     setHeaderColor(uiColors[uiTheme].toolbarBg)
   }, [uiTheme,uiColors])
+console.log(gradientBg)
 
 
   // --------------------------- RENDER ---------------------------

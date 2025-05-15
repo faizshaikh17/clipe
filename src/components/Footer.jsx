@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import html2canvas from 'html2canvas-pro';
 import { toPng } from 'html-to-image';
 
 export default function Footer({
@@ -22,6 +21,8 @@ export default function Footer({
 }) {
   // Event Handlers
   const setGradientValue = (option) => {
+    console.log(option.value);
+
     setGradientBg(option.value);
   };
 
@@ -103,6 +104,10 @@ export default function Footer({
           <select
             className="h-8 w-26 rounded-md border bg-gray-100 px-2 text-sm font-semibold text-black text-[0.8rem] focus:border-black focus:outline-none"
             name="Gradients"
+            onChange={(e) => {
+              const value = e.target.value
+              setGradientBg(value)
+            }}
           >
             {Object.entries(gradients)
               .map(([id, value]) => ({ id, value }))
@@ -111,8 +116,9 @@ export default function Footer({
                   key={item.id}
                   id={item.id}
                   value={item.value}
-                  onClick={() => setGradientValue(item)}
+
                 >
+
                   {item.id}
                 </option>
               ))}
@@ -127,6 +133,10 @@ export default function Footer({
           <select
             className="h-8 w-26 rounded-md border bg-gray-100 px-2 text-sm font-semibold text-black text-[0.8rem] focus:border-black focus:outline-none"
             name="UiThemes"
+            onChange={(e) => {
+              const value = e.target.value
+              setUiThemeValue(value)
+            }}
           >
             {Object.entries(uiThemes)
               .map(([id, value]) => ({ id, value }))
@@ -134,7 +144,6 @@ export default function Footer({
                 <option
                   key={item.id}
                   name={item.id}
-                  onClick={(e) => setUiThemeValue(e.target.value)}
                 >
                   {item.id}
                 </option>
@@ -150,12 +159,15 @@ export default function Footer({
           <select
             className="h-8 w-23 rounded-md border bg-gray-100 px-2 text-sm font-semibold text-black text-[0.8rem] focus:border-black focus:outline-none"
             id="themeSelect"
+            onChange={(e) => {
+              const value = e.target.value
+              setCodeTheme(value)
+            }}
           >
             {Object.keys(codeThemes).map((item) => (
               <option
                 key={item}
                 value={item}
-                onClick={(e) => setCodeTheme(e.target.value)}
               >
                 {item}
               </option>
@@ -171,6 +183,10 @@ export default function Footer({
           <select
             className="h-8 w-25 rounded-md border bg-gray-100 px-2 text-sm font-semibold text-black text-[0.8rem] focus:border-black focus:outline-none"
             id="themeSelect"
+            onChange={(e) => {
+              const value = e.target.value
+              setLanguageValue(value)
+            }}
           >
             {Object.entries(languages)
               .map(([id, value]) => ({ id, value }))
@@ -178,7 +194,6 @@ export default function Footer({
                 <option
                   key={item.id}
                   value={item.value}
-                  onClick={() => setLanguageValue(item.value)}
                 >
                   {item.id}
                 </option>
@@ -209,11 +224,16 @@ export default function Footer({
           <label className="px-0.5 text-xs font-semibold dark:text-white text-black" htmlFor="fontSize">
             Download
           </label>
-          <select className="h-8 w-24 rounded-md border bg-gray-100 text-black px-2 text-sm font-semibold text-[0.8rem] focus:border-black focus:outline-none">
-            <option onClick={(e) => exportImage(e.target.value)} value="download">
+          <select className="h-8 w-24 rounded-md border bg-gray-100 text-black px-2 text-sm font-semibold text-[0.8rem] focus:border-black focus:outline-none"
+            onChange={(e) => {
+              const value = e.target.value
+              exportImage(value)
+            }}
+          >
+            <option value="download">
               Download
             </option>
-            <option onClick={(e) => exportImage(e.target.value)} value="link">
+            <option value="link">
               Get Link
             </option>
           </select>

@@ -9,7 +9,6 @@ export default function Header({ headerColor }) {
     const status = e.currentTarget.checked
     status ? darkTheme() : lightTheme();
   };
-  console.log(headerColor);
 
 
   return (
