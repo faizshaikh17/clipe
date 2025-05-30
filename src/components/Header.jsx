@@ -32,8 +32,8 @@ export default function Header({ headerColor }) {
                 onChange={handleMode}
                 checked={themeMode === 'dark'}
               />
-              <div className="h-8 w-8 flex justify-center items-center">
-                {themeMode === 'dark' ? <Sun size={18} /> : <MoonIcon size={18} />}
+              <div className="flex justify-center items-center">
+                {themeMode === 'dark' ? <Sun size={16} /> : <MoonIcon size={16} />}
               </div>
             </label>
           </div>
