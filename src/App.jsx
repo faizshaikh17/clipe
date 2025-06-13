@@ -10,10 +10,9 @@ import {
 } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { ThemeProvider } from './context/context';
 
-// --------------------------- CONSTANTS ---------------------------
 const uiThemes = {
   googiePop: { toolbarBg: '#2DD4BF', buttonHover: '#FF6B6B', codeBg: '#F0FFF4', textColor: '#4A4A4A' },
-  sketchy: { toolbarBg: '#EDEDED', buttonHover: '#B0B0B0', codeBg: '#F8F8F8', textColor: '#212121' },
+  sketchy: { toolbarBg: '#D4D4D4', buttonHover: '#B0B0B0', codeBg: '#F8F8F8', textColor: '#212121' },
   limeFiesta: { toolbarBg: '#B1FA63', buttonHover: '#FE7733', codeBg: '#F0FFF0', textColor: '#2A2A2A' },
   coralPulse: { toolbarBg: '#FE7733', buttonHover: '#B2A1FF', codeBg: '#FFF3EB', textColor: '#1F2A44' },
   violetWhirl: { toolbarBg: '#B2A1FF', buttonHover: '#B1FA63', codeBg: '#F5F0FF', textColor: '#2E1C3A' },
@@ -48,29 +47,15 @@ const codeThemes = {
 };
 
 const languages = {
-  JavaScript: 'javascript',
-  Bash: 'bash',
-  Shell: 'shell',
-  CPP: 'cpp',
-  CSharp: 'csharp',
-  CSS: 'css',
-  Java: 'java',
-  PHP: 'php',
-  Text: 'text',
-  Python: 'python',
-  Ruby: 'ruby',
-  Sass: 'sass',
-  SQL: 'sql',
-  HTML: 'xml',
+  JavaScript: 'javascript', Bash: 'bash', Shell: 'shell', CPP: 'cpp', CSharp: 'csharp', CSS: 'css', Java: 'java',
+  PHP: 'php', Text: 'text', Python: 'python', Ruby: 'ruby', Sass: 'sass', SQL: 'sql', HTML: 'xml',
 };
 
-// --------------------------- COMPONENT ---------------------------
 export default function App() {
-  // State
   const [userInput, setUserInput] = useState('');
   const [codeTheme, setCodeTheme] = useState('atomDark');
-  const [gradientBg, setGradientBg] = useState(gradients.pastelAurora);
-  const [uiTheme, setUiTheme] = useState('googiePop');
+  const [gradientBg, setGradientBg] = useState(gradients.tealAbyss);
+  const [uiTheme, setUiTheme] = useState('sketchy');
   const [fontSize, setFontSize] = useState(14);
   const [language, setLanguage] = useState('javascript');
   const [bgToggle, setBgToggle] = useState(true);
@@ -86,24 +71,19 @@ export default function App() {
   alert(\`Welcome to Clipe, \${name}!\`);
 }`;
 
-  // Theme mode
   const lightTheme = () => setThemeMode('light');
   const darkTheme = () => setThemeMode('dark');
-
-  // Clipboard
   const handleCopy = () => navigator.clipboard.writeText(userInput || placeholderCode);
   const handleCopyLink = () => navigator.clipboard.writeText(url);
   const handleClear = () => setUserInput('');
   const handleLinkToggle = () => setUrl(null);
 
-  // Apply theme mode class to root
   useEffect(() => {
     const root = document.documentElement;
-    root?.classList.remove('light', 'dark');
-    root?.classList.add(themeMode);
+    root.classList.remove('light', 'dark');
+    root.classList.add(themeMode);
   }, [themeMode]);
 
-  // Props for Footer
   const gradientProps = {
     gradients, setGradientBg, uiThemes, setUiTheme,
     codeThemes, setCodeTheme, fontSize, setFontSize,
@@ -112,41 +92,36 @@ export default function App() {
   };
 
   const uiColors = Object.fromEntries(Object.entries(uiThemes));
-  const [headerColor, setHeaderColor] = useState(uiColors[uiTheme].toolbarBg)
+  const [headerColor, setHeaderColor] = useState(uiColors[uiTheme].toolbarBg);
   useEffect(() => {
-    setHeaderColor(uiColors[uiTheme].toolbarBg)
-  }, [uiTheme, uiColors])
+    setHeaderColor(uiColors[uiTheme].toolbarBg);
+  }, [uiTheme, uiColors]);
 
-
-  // --------------------------- RENDER ---------------------------
   return (
     <ThemeProvider value={{ themeMode, lightTheme, darkTheme }}>
       <Header headerColor={headerColor} />
       <main
-        className={`flex font flex-col mt-15 items-center justify-start space-y-12 min-h-svh w-full transition duration-500 text-black dark:text-white`}
-        style={{ backgroundColor: themeMode === 'dark' ? '#121212' : uiColors[uiTheme].codeBg, color: uiColors[uiTheme].textColor }}
+        className={`flex flex-col mt-15 items-center justify-start space-y-12 min-h-svh w-full transition duration-500 text-black dark:text-white`}
+        style={{
+          backgroundColor: themeMode === 'dark' ? '#121212' : uiColors[uiTheme].codeBg,
+          color: uiColors[uiTheme].textColor
+        }}
       >
-        <div className="mt-10 flex sm:w-[30rem] w-[21rem] flex-col items-center justify-center space-y-6">
+        <div className="mt-10 w-full max-w-[30rem] px-4 flex flex-col items-center justify-center space-y-6">
           <CodeArea userInput={userInput} setUserInput={setUserInput} />
         </div>
 
-
-
-        <div id="hero" className="flex justify-center">
+        <div id="hero" className="flex justify-center w-full px-4">
           {bgToggle && gradientToggle ? (
             <div
               ref={exportRef}
-              className="max-w-6xl min-w-[30rem] overflow-hidden rounded-lg border border-black shadow-lg transition hover:shadow-md"
+              className=" max-w-6xl overflow-hidden rounded-lg border border-black shadow-lg transition hover:shadow-md"
             >
               <div
                 className="flex h-10 justify-end border-b border-black"
                 style={{ backgroundColor: uiColors[uiTheme].toolbarBg }}
               >
-                {[
-                  { Icon: Minus, label: 'Minimize', onClick: () => { } },
-                  { Icon: Copy, label: 'Copy', onClick: handleCopy },
-                  { Icon: X, label: 'Clear', onClick: handleClear },
-                ].map(({ Icon, label, onClick }, index) => (
+                {[{ Icon: Minus, label: 'Minimize', onClick: () => { } }, { Icon: Copy, label: 'Copy', onClick: handleCopy }, { Icon: X, label: 'Clear', onClick: handleClear }].map(({ Icon, label, onClick }, index) => (
                   <button
                     key={index}
                     aria-label={label}
@@ -154,21 +129,16 @@ export default function App() {
                     onClick={onClick}
                     className="flex w-10 items-center justify-center border-l border-black transition"
                     style={{ backgroundColor: 'transparent' }}
-                    onMouseOver={(e) =>
-                      (e.currentTarget.style.backgroundColor = uiColors[uiTheme].buttonHover)
-                    }
-                    onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+                    onMouseOver={e => (e.currentTarget.style.backgroundColor = uiColors[uiTheme].buttonHover)}
+                    onMouseOut={e => (e.currentTarget.style.backgroundColor = 'transparent')}
                   >
                     <Icon />
                   </button>
                 ))}
               </div>
-              <div className="w-full p-8" style={{ background: gradientBg }}>
+              <div className="w-full p-4 sm:p-8" style={{ background: gradientBg }}>
                 <div className="relative rounded-lg overflow-auto">
-                  <div
-                    className={`flex z-1 absolute gap-2 ${fontSize >= 30 ? 'top-10 left-5' : 'top-5 left-3.5'
-                      }`}
-                  >
+                  <div className={`flex z-1 absolute gap-2 ${fontSize >= 30 ? 'top-10 left-5' : 'top-5 left-3.5'}`}>
                     <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
                     <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
                     <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
@@ -191,12 +161,9 @@ export default function App() {
               </div>
             </div>
           ) : !bgToggle && gradientToggle ? (
-            <div ref={exportRef} className="max-w-7xl" style={{ background: gradientBg }}>
-              <div className="relative overflow-auto p-10">
-                <div
-                  className={`flex z-1 absolute gap-2 ${fontSize >= 30 ? 'top-10 left-5' : 'top-15 left-13'
-                    }`}
-                >
+            <div ref={exportRef} className="w-full max-w-7xl overflow-auto rounded-lg" style={{ background: gradientBg }}>
+              <div className="relative overflow-auto p-4 sm:p-10">
+                <div className={`flex z-1 absolute gap-2 ${fontSize >= 30 ? 'top-10 left-5' : 'top-10 left-4'}`}>
                   <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
                   <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
                   <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
@@ -220,38 +187,29 @@ export default function App() {
           ) : bgToggle && !gradientToggle ? (
             <div
               ref={exportRef}
+              className="w-full max-w-7xl overflow-hidden rounded-xl border border-black shadow-lg transition hover:shadow-md"
               style={{ backgroundColor: uiColors[uiTheme].codeBg }}
-              className="max-w-7xl overflow-hidden rounded-xl border border-black shadow-lg transition hover:shadow-md"
             >
               <div
                 className="flex h-10 justify-end border-b border-black"
                 style={{ backgroundColor: uiColors[uiTheme].toolbarBg }}
               >
-                {[
-                  { Icon: Minus, label: 'Minimize', onClick: () => { } },
-                  { Icon: Copy, label: 'Copy', onClick: handleCopy },
-                  { Icon: X, label: 'Clear', onClick: handleClear },
-                ].map(({ Icon, label, onClick }, index) => (
+                {[{ Icon: Minus, label: 'Minimize', onClick: () => { } }, { Icon: Copy, label: 'Copy', onClick: handleCopy }, { Icon: X, label: 'Clear', onClick: handleClear }].map(({ Icon, label, onClick }, index) => (
                   <button
                     key={index}
                     aria-label={label}
                     onClick={onClick}
                     className="flex w-10 items-center justify-center border-l border-black transition"
                     style={{ backgroundColor: 'transparent' }}
-                    onMouseOver={(e) =>
-                      (e.currentTarget.style.backgroundColor = uiColors[uiTheme].buttonHover)
-                    }
-                    onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+                    onMouseOver={e => (e.currentTarget.style.backgroundColor = uiColors[uiTheme].buttonHover)}
+                    onMouseOut={e => (e.currentTarget.style.backgroundColor = 'transparent')}
                   >
                     <Icon />
                   </button>
                 ))}
               </div>
-              <div className="relative overflow-auto rounded-lg p-10">
-                <div
-                  className={`flex z-1 absolute gap-2 ${fontSize >= 30 ? 'top-10 left-5' : 'top-15 left-13'
-                    }`}
-                >
+              <div className="relative overflow-auto rounded-lg p-4 sm:p-10">
+                <div className={`flex z-1 absolute gap-2 ${fontSize >= 30 ? 'top-10 left-5' : 'top-10 left-4'}`}>
                   <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
                   <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
                   <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
@@ -273,12 +231,9 @@ export default function App() {
               </div>
             </div>
           ) : (
-            <div ref={exportRef} className="rounded-lg">
-              <div className="relative max-w-7xl transparent rounded-lg shadow-black shadow-2xl overflow-hidden">
-                <div
-                  className={`flex z-1 absolute gap-2 ${fontSize >= 30 ? 'top-10 left-5' : 'top-3 left-3'
-                    }`}
-                >
+            <div ref={exportRef} className="w-full max-w-7xl rounded-lg overflow-auto">
+              <div className="relative rounded-lg shadow-black shadow-2xl">
+                <div className={`flex z-1 absolute gap-2 ${fontSize >= 30 ? 'top-10 left-5' : 'top-3 left-3'}`}>
                   <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
                   <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
                   <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
@@ -305,12 +260,12 @@ export default function App() {
 
         {cross && url && (
           <>
-            <div className=" inset-0 fixed backdrop-blur-xs z-[9] min-h-screen" />
-            <div className="absolute z-[10] top-1/2 h-20 flex gap-6 items-center justify-between p-4 text-white dark:text-black dark:bg-white/50 bg-black/70 backdrop-blur-sm border border-[#f9f327]/20 shadow-2xl">
-              <p className=" break-all text-sm">{url}</p>
-              <div className=" right-0 space-y-4">
-                <X className='cursor-pointer' size={24} onClick={handleLinkToggle} />
-                <Copy className='cursor-pointer' size={24} onClick={handleCopyLink} />
+            <div className="fixed inset-0 backdrop-blur-xs z-[9] min-h-screen" />
+            <div className="absolute z-[10] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-sm w-full h-20 flex gap-6 items-center justify-between p-4 text-white dark:text-black dark:bg-white/50 bg-black/70 backdrop-blur-sm border border-[#f9f327]/20 shadow-2xl">
+              <p className="break-all text-sm">{url}</p>
+              <div className="space-y-4">
+                <X className="cursor-pointer" size={24} onClick={handleLinkToggle} />
+                <Copy className="cursor-pointer" size={24} onClick={handleCopyLink} />
               </div>
             </div>
           </>
@@ -318,6 +273,7 @@ export default function App() {
 
         <Footer {...gradientProps} />
       </main>
+
     </ThemeProvider>
   );
 }
