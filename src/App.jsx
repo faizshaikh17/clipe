@@ -66,6 +66,13 @@ export default function App() {
   const [themeMode, setThemeMode] = useState('light');
   const exportRef = useRef(null);
 
+  const colorDots = [
+    'bg-red-400',
+    'bg-yellow-400',
+    'bg-green-400',
+  ];
+
+
   const placeholderCode = `function greet() {
   const name = prompt("What's your name?");
   alert(\`Welcome to Clipe, \${name}!\`);
@@ -138,10 +145,11 @@ export default function App() {
               </div>
               <div className="w-full p-4 sm:p-8" style={{ background: gradientBg }}>
                 <div className="relative rounded-lg overflow-auto">
-                  <div className={`flex z-1 absolute gap-2 ${fontSize >= 30 ? 'top-10 left-5' : 'top-5 left-3.5'}`}>
-                    <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
+                  <div className={`flex z-1 absolute gap-2 ${fontSize >= 30 ? 'top-7 left-7' : 'top-5 left-4'}`}>
+                    {colorDots.map((color, i) => (
+                      <span key={i} className={`${fontSize >= 30 ? 'size-5' : 'size-2.5'}  rounded-full ${color}`} />
+                    ))}
+
                   </div>
                   <SyntaxHighlighter
                     className="rounded-lg"
@@ -161,12 +169,12 @@ export default function App() {
               </div>
             </div>
           ) : !bgToggle && gradientToggle ? (
-            <div ref={exportRef} className="w-full max-w-7xl overflow-auto rounded-lg" style={{ background: gradientBg }}>
+            <div ref={exportRef} className="max-w-6xl  overflow-auto rounded-lg" style={{ background: gradientBg }}>
               <div className="relative overflow-auto p-4 sm:p-10">
-                <div className={`flex z-1 absolute gap-2 ${fontSize >= 30 ? 'top-10 left-5' : 'top-10 left-4'}`}>
-                  <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
+                <div className={`flex z-1 absolute gap-2 ${fontSize >= 30 ? 'top-17 left-16' : 'top-15 left-14'}`}>
+                  {colorDots.map((color, i) => (
+                    <span key={i} className={`${fontSize >= 30 ? 'size-5' : 'size-2.5'}  rounded-full ${color}`} />
+                  ))}
                 </div>
                 <SyntaxHighlighter
                   className="rounded-lg"
@@ -187,7 +195,7 @@ export default function App() {
           ) : bgToggle && !gradientToggle ? (
             <div
               ref={exportRef}
-              className="w-full max-w-7xl overflow-hidden rounded-xl border border-black shadow-lg transition hover:shadow-md"
+              className="max-w-6xl overflow-hidden rounded-xl border border-black shadow-lg transition hover:shadow-md"
               style={{ backgroundColor: uiColors[uiTheme].codeBg }}
             >
               <div
@@ -209,10 +217,10 @@ export default function App() {
                 ))}
               </div>
               <div className="relative overflow-auto rounded-lg p-4 sm:p-10">
-                <div className={`flex z-1 absolute gap-2 ${fontSize >= 30 ? 'top-10 left-5' : 'top-10 left-4'}`}>
-                  <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
+                <div className={`flex z-1 absolute gap-2 ${fontSize >= 30 ? 'top-18 left-17' : 'top-15 left-14'}`}>
+                  {colorDots.map((color, i) => (
+                    <span key={i} className={`${fontSize >= 30 ? 'size-5' : 'size-2.5'}  rounded-full ${color}`} />
+                  ))}
                 </div>
                 <SyntaxHighlighter
                   className="rounded-lg"
@@ -231,12 +239,12 @@ export default function App() {
               </div>
             </div>
           ) : (
-            <div ref={exportRef} className="w-full max-w-7xl rounded-lg overflow-auto">
+            <div ref={exportRef} className=" max-w-6xl rounded-lg overflow-auto">
               <div className="relative rounded-lg shadow-black shadow-2xl">
-                <div className={`flex z-1 absolute gap-2 ${fontSize >= 30 ? 'top-10 left-5' : 'top-3 left-3'}`}>
-                  <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
+                <div className={`flex z-1 absolute gap-2 ${fontSize >= 30 ? 'top-4 left-5' : 'top-4 left-4'}`}>
+                  {colorDots.map((color, i) => (
+                    <span key={i} className={`${fontSize >= 30 ? 'size-5' : 'size-2.5'}  rounded-full ${color}`} />
+                  ))}
                 </div>
                 <SyntaxHighlighter
                   className="rounded-lg"
